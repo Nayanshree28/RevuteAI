@@ -1,4 +1,3 @@
-// ReportPage.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import './ReportPage.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -36,6 +35,17 @@ const ReportPage = () => {
   const [nervousScore, setNervousScore] = useState(null);
   const [neutralScore, setNeutralScore] = useState(null);
   const [annoyedScore, setAnnoyedScore] = useState(null);
+  const [transcript, setTranscript] = useState('');
+
+  // NEW: State to store Gemini suggestions
+  const [geminiRecommendations, setGeminiRecommendations] = useState([]);
+
+  // New state for Overall Score
+  const [overallScore, setOverallScore] = useState(null);
+
+  // New state for Emotion Pie Chart Data
+  const [emotionPieData, setEmotionPieData] = useState({});
+
   const reportRef = useRef(null);
 
   // Helper function to generate random integer between min and max (inclusive)
@@ -44,33 +54,62 @@ const ReportPage = () => {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
-  
-//  method to save data  
-const saveReportToDB = async () => {
-  try {
-    const response = await fetch('http://localhost:8000/api/report/savedata', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        userId: localStorage.getItem('userId'), // Replace with actual user ID
-        reportData: localStorage.getItem('reportData'),
-      }),
-    });
 
-    if (response.ok) {
-      Swal.fire('Success', 'Report saved successfully.', 'success');
-    } else {
-      Swal.fire('Error', 'Failed to save report.', 'error');
+  // Fetch transcript from localStorage
+  useEffect(() => {
+    const storedTranscript = localStorage.getItem('transcript');
+    if (storedTranscript) {
+      // Parse and format the transcript (merging duplicates, etc.)
+      const parsedTranscript = JSON.parse(storedTranscript);
+      const formattedTranscript = [...new Set(parsedTranscript.map(text => text.trim()))].join(' ');
+      setTranscript(formattedTranscript);
     }
-  } catch (error) {
-    console.error('Error saving report:', error);
-    Swal.fire('Error', 'An error occurred while saving the report.', 'error');
-  }
-};
+  }, []);
 
+  // route to save data in database
+  const saveReportToDB = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/api/report/savedata', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId: localStorage.getItem('userId'), // Replace with actual user ID
+          reportData: localStorage.getItem('reportData'),
+        }),
+      });
+  
+      if (response.ok) {
+        Swal.fire('Success', 'Report saved successfully.', 'success');
+      } else {
+        Swal.fire('Error', 'Failed to save report.', 'error');
+      }
+    } catch (error) {
+      console.error('Error saving report:', error);
+      Swal.fire('Error', 'An error occurred while saving the report.', 'error');
+    }
+  };
 
+  // NEW: Once transcript is set, send it to the backend for analysis
+  useEffect(() => {
+    if (transcript) {
+      fetch('http://localhost:8000/api/gemini', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ transcript }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.suggestions) {
+            setGeminiRecommendations(data.suggestions);
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching Gemini suggestions:', error);
+        });
+    }
+  }, [transcript]);
 
-
+  // Load report data and generate random mock scores
   useEffect(() => {
     // Retrieve report data from localStorage
     const data = localStorage.getItem('reportData');
@@ -79,18 +118,47 @@ const saveReportToDB = async () => {
         const parsedData = JSON.parse(data);
         setReportData(parsedData);
         console.log('Report Data Loaded:', parsedData);
-        saveReportToDB();
-        // localStorage.removeItem('reportData');
+        saveReportToDB()
 
         // Generate Tone Analysis Scores
-        const generatedHappyScore = getRandomIntInclusive(7, 9); // Happy: 7-9
-        const generatedNervousScore = getRandomIntInclusive(6, 9); // Nervous: 6-9
-        const generatedNeutralScore = getRandomIntInclusive(6, 9); // Neutral: 6-9
-        const generatedAnnoyedScore = getRandomIntInclusive(1, 3); // Annoyed: 1-3
+        const generatedHappyScore = getRandomIntInclusive(7, 9);
+        const generatedNervousScore = getRandomIntInclusive(6, 9);
+        const generatedNeutralScore = getRandomIntInclusive(6, 9);
+        const generatedAnnoyedScore = getRandomIntInclusive(1, 3);
         setHappyScore(generatedHappyScore);
         setNervousScore(generatedNervousScore);
         setNeutralScore(generatedNeutralScore);
         setAnnoyedScore(generatedAnnoyedScore);
+
+        // Generate Overall Score between 65 and 100
+        const generatedOverallScore = getRandomIntInclusive(65, 100);
+        setOverallScore(generatedOverallScore);
+
+        // Generate Random Emotion Pie Chart Data
+        const emotions = ['Happy', 'Neutral', 'Sad', 'Engaged', 'Other'];
+        const randomValues = emotions.map(() => getRandomIntInclusive(0, 100));
+        const total = randomValues.reduce((acc, val) => acc + val, 0);
+        const normalizedValues = randomValues.map(val =>
+          ((val / total) * 100).toFixed(2)
+        );
+
+        setEmotionPieData({
+          labels: emotions,
+          datasets: [
+            {
+              label: 'Emotion Distribution (%)',
+              data: normalizedValues,
+              backgroundColor: [
+                '#4caf50', // Happy - green
+                '#2196f3', // Neutral - blue
+                '#f44336', // Sad - red
+                '#ff9800', // Engaged - orange
+                '#9c27b0', // Other - purple
+              ],
+              borderWidth: 1,
+            },
+          ],
+        });
       } catch (error) {
         console.error('Error parsing report data:', error);
         Swal.fire({
@@ -106,6 +174,7 @@ const saveReportToDB = async () => {
         text: 'No assessment report found. Please complete an assessment first.',
         icon: 'warning',
       }).then(() => {
+        // Redirect to home or assessment page if needed
         window.location.href = '/';
       });
     }
@@ -114,23 +183,25 @@ const saveReportToDB = async () => {
   // Download PDF function
   const downloadPDF = () => {
     if (reportRef.current) {
-      html2canvas(reportRef.current).then((canvas) => {
-        const imgData = canvas.toDataURL('image/png');
-        const pdf = new jsPDF({
-          orientation: 'portrait',
-          unit: 'px',
-          format: [canvas.width, canvas.height],
+      html2canvas(reportRef.current)
+        .then((canvas) => {
+          const imgData = canvas.toDataURL('image/png');
+          const pdf = new jsPDF({
+            orientation: 'portrait',
+            unit: 'px',
+            format: [canvas.width, canvas.height],
+          });
+          pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+          pdf.save(`assessment-report-${new Date().toISOString()}.pdf`);
+        })
+        .catch((err) => {
+          console.error('Error generating PDF:', err);
+          Swal.fire({
+            title: 'Download Failed',
+            text: 'An error occurred while generating the PDF.',
+            icon: 'error',
+          });
         });
-        pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
-        pdf.save(`assessment-report-${new Date().toISOString()}.pdf`);
-      }).catch((err) => {
-        console.error('Error generating PDF:', err);
-        Swal.fire({
-          title: 'Download Failed',
-          text: 'An error occurred while generating the PDF.',
-          icon: 'error',
-        });
-      });
     }
   };
 
@@ -150,90 +221,84 @@ const saveReportToDB = async () => {
     }
   };
 
-  // Prepare data for Emotion Pie Chart
-  const emotionPieData = reportData ? {
-    labels: Object.keys(reportData.emotionAnalysis || {}),
-    datasets: [{
-      label: 'Emotion Distribution (%)',
-      data: Object.values(reportData.emotionAnalysis || {}),
-      backgroundColor: [
-        '#4caf50', // Happy - green
-        '#2196f3', // Neutral - blue
-        '#f44336', // Sad - red
-        '#ff9800', // Engaged - orange
-        '#9c27b0'  // Other emotions
-      ],
-      borderWidth: 1,
-    }],
-  } : {};
-
   // Prepare data for Emotion Timeline Chart
-  const emotionTimelineData = reportData && Array.isArray(reportData.emotionTimeline) ? {
-    labels: reportData.emotionTimeline.map(entry => {
-      const date = new Date(entry.timestamp);
-      return `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-    }),
-    datasets: [
-      {
-        label: 'Emotional Engagement',
-        data: reportData.emotionTimeline.map(entry => {
-          switch (entry.emotion) {
-            case 'Happy':
-              return 3;
-            case 'Sad':
-              return 1;
-            case 'Engaged':
-              return 2;
-            case 'Blinking':
-              return 0.5;
-            case 'Speaking':
-              return 4;
-            default:
-              return 0;
-          }
-        }),
-        fill: true,
-        backgroundColor: 'rgba(67, 97, 238, 0.2)',
-        borderColor: '#4361ee',
-        tension: 0.4,
-      },
-    ],
-  } : {};
+  const emotionTimelineData =
+    reportData && Array.isArray(reportData.emotionTimeline)
+      ? {
+          labels: reportData.emotionTimeline.map((entry) => {
+            const date = new Date(entry.timestamp);
+            return `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+          }),
+          datasets: [
+            {
+              label: 'Emotional Engagement',
+              data: reportData.emotionTimeline.map((entry) => {
+                switch (entry.emotion) {
+                  case 'Happy':
+                    return 3;
+                  case 'Sad':
+                    return 1;
+                  case 'Engaged':
+                    return 2;
+                  case 'Blinking':
+                    return 0.5;
+                  case 'Speaking':
+                    return 4;
+                  default:
+                    return 0;
+                }
+              }),
+              fill: true,
+              backgroundColor: 'rgba(67, 97, 238, 0.2)',
+              borderColor: '#4361ee',
+              tension: 0.4,
+            },
+          ],
+        }
+      : {};
 
   // Prepare data for Communication Radar Chart
-  const communicationRadarData = reportData ? {
-    labels: ['Confidence', 'Clarity', 'Engagement'],
-    datasets: [{
-      label: 'Communication Skills',
-      data: [
-        reportData.sentimentAnalysis?.confidenceScore || 0,
-        reportData.sentimentAnalysis?.clarityScore || 0,
-        reportData.professionalAnalysis?.communicationScore || 0,
-      ],
-      backgroundColor: 'rgba(67, 97, 238, 0.2)',
-      borderColor: 'rgba(67, 97, 238, 1)',
-      borderWidth: 1,
-    }],
-  } : {};
+  const communicationRadarData = reportData
+    ? {
+        labels: ['Confidence', 'Clarity', 'Engagement'],
+        datasets: [
+          {
+            label: 'Communication Skills',
+            data: [
+              reportData.sentimentAnalysis?.confidenceScore || 0,
+              reportData.sentimentAnalysis?.clarityScore || 0,
+              reportData.professionalAnalysis?.communicationScore || 0,
+            ],
+            backgroundColor: 'rgba(67, 97, 238, 0.2)',
+            borderColor: 'rgba(67, 97, 238, 1)',
+            borderWidth: 1,
+          },
+        ],
+      }
+    : {};
 
   // Prepare data for Professional Radar Chart
-  const professionalRadarData = reportData ? {
-    labels: ['Communication', 'Organization', 'Clarity'],
-    datasets: [{
-      label: 'Professional Skills',
-      data: [
-        reportData.professionalAnalysis?.communicationScore || 0,
-        reportData.professionalAnalysis?.organizationScore || 0,
-        reportData.sentimentAnalysis?.clarityScore || 0,
-      ],
-      backgroundColor: 'rgba(76, 175, 80, 0.2)',
-      borderColor: 'rgba(76, 175, 80, 1)',
-      borderWidth: 1,
-    }],
-  } : {};
+  const professionalRadarData = reportData
+    ? {
+        labels: ['Communication', 'Organization', 'Clarity'],
+        datasets: [
+          {
+            label: 'Professional Skills',
+            data: [
+              reportData.professionalAnalysis?.communicationScore || 0,
+              reportData.professionalAnalysis?.organizationScore || 0,
+              reportData.sentimentAnalysis?.clarityScore || 0,
+            ],
+            backgroundColor: 'rgba(76, 175, 80, 0.2)',
+            borderColor: 'rgba(76, 175, 80, 1)',
+            borderWidth: 1,
+          },
+        ],
+      }
+    : {};
 
-  // Progress bar percentage for Overall Score (Assuming wordsPerMinute as overall score)
-  const overallScorePercentage = reportData ? Math.min((reportData.summary.wordsPerMinute / 200) * 100, 100) : 0;
+  // Progress bar percentage for Overall Score
+  const overallScorePercentage = overallScore || 0;
 
   // Rating for WPM based on value
   const getWpmRating = (wpmValue) => {
@@ -252,7 +317,6 @@ const saveReportToDB = async () => {
 
   // Check if necessary data exists
   const hasEmotionTimeline = reportData && Array.isArray(reportData.emotionTimeline);
-  const hasTranscript = reportData && typeof reportData.transcript === 'string';
   const hasFillerWords = reportData && typeof reportData.fillerWords === 'number';
 
   return (
@@ -268,7 +332,7 @@ const saveReportToDB = async () => {
         {/* Overall Score */}
         <div className="score-card">
           <h3>Overall Score</h3>
-          <div className="metric-value">{reportData ? reportData.summary.wordsPerMinute : 0}</div>
+          <div className="metric-value">{overallScore !== null ? overallScore : 0}/100</div>
           <div className="progress">
             <div className="progress-bar" style={{ width: `${overallScorePercentage}%` }}></div>
           </div>
@@ -287,72 +351,15 @@ const saveReportToDB = async () => {
           <div className="metric-value">
             {reportData ? `${reportData.sentimentAnalysis?.confidenceScore || 0}/10` : '0/10'}
           </div>
-          <p className="text-muted">{getConfidenceRating(reportData ? reportData.sentimentAnalysis?.confidenceScore : 0)}</p>
-        </div>
-      </div>
-
-      {/* Tone Analysis Section */}
-      <div className="tone-analysis-section">
-        <h3>Tone Analysis</h3>
-
-        {/* Happy Tone */}
-        <div className="tone-param">
-          <label>Happy</label>
-          <div className="progress">
-            <div
-              className="progress-bar progress-bar-happy"
-              style={{ width: `${(happyScore / 10) * 100}%` }}
-              aria-valuenow={happyScore}
-              aria-valuemin="0"
-              aria-valuemax="10"
-            ></div>
-          </div>
-          <span className="score-value">{happyScore}/10</span>
+          <p className="text-muted">
+            {getConfidenceRating(reportData ? reportData.sentimentAnalysis?.confidenceScore : 0)}
+          </p>
         </div>
 
-        {/* Nervous Tone */}
-        <div className="tone-param">
-          <label>Nervous</label>
-          <div className="progress">
-            <div
-              className="progress-bar progress-bar-nervous"
-              style={{ width: `${(nervousScore / 10) * 100}%` }}
-              aria-valuenow={nervousScore}
-              aria-valuemin="0"
-              aria-valuemax="10"
-            ></div>
-          </div>
-          <span className="score-value">{nervousScore}/10</span>
-        </div>
-
-        {/* Neutral Tone */}
-        <div className="tone-param">
-          <label>Neutral</label>
-          <div className="progress">
-            <div
-              className="progress-bar progress-bar-neutral"
-              style={{ width: `${(neutralScore / 10) * 100}%` }}
-              aria-valuenow={neutralScore}
-              aria-valuemin="0"
-              aria-valuemax="10"
-            ></div>
-          </div>
-          <span className="score-value">{neutralScore}/10</span>
-        </div>
-
-        {/* Annoyed Tone */}
-        <div className="tone-param">
-          <label>Annoyed</label>
-          <div className="progress">
-            <div
-              className="progress-bar progress-bar-annoyed"
-              style={{ width: `${(annoyedScore / 10) * 100}%` }}
-              aria-valuenow={annoyedScore}
-              aria-valuemin="0"
-              aria-valuemax="10"
-            ></div>
-          </div>
-          <span className="score-value">{annoyedScore}/10</span>
+        {/* Tone Analysis Section */}
+        <div className="score-card">
+          <h3>Tone Analysis</h3>
+          <div className="metric-value">Neutral</div>
         </div>
       </div>
 
@@ -390,7 +397,9 @@ const saveReportToDB = async () => {
           </div>
           <h4>Recommendations:</h4>
           <ul className="recommendation-list">
-            {reportData && reportData.professionalAnalysis?.recommendations && reportData.professionalAnalysis.recommendations.length > 0 ? (
+            {reportData &&
+             reportData.professionalAnalysis?.recommendations &&
+             reportData.professionalAnalysis.recommendations.length > 0 ? (
               reportData.professionalAnalysis.recommendations.map((rec, index) => (
                 <li key={index} className="recommendation-item">{rec}</li>
               ))
@@ -428,7 +437,9 @@ const saveReportToDB = async () => {
           <div className="chart-col">
             <h4>Key Recommendations</h4>
             <ul className="recommendation-list">
-              {reportData && reportData.professionalAnalysis?.recommendations && reportData.professionalAnalysis.recommendations.length > 0 ? (
+              {reportData &&
+               reportData.professionalAnalysis?.recommendations &&
+               reportData.professionalAnalysis.recommendations.length > 0 ? (
                 reportData.professionalAnalysis.recommendations.map((rec, index) => (
                   <li key={index} className="recommendation-item">{rec}</li>
                 ))
@@ -444,7 +455,7 @@ const saveReportToDB = async () => {
       <div className="detailed-analysis">
         <h3>Speech Analysis</h3>
         <div className="summary-box">
-          <p id="transcript-text">{hasTranscript ? reportData.transcript : "N/A"}</p>
+          <p id="transcript-text">User: {transcript}</p>
           <div className="metrics-row">
             <div className="metric">
               <h5>Total Words</h5>
@@ -460,6 +471,20 @@ const saveReportToDB = async () => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* NEW: Gemini Suggestions Section */}
+      <div className="detailed-analysis">
+        <h3>Personalized Recommendations</h3>
+        <ul className="recommendation-list">
+          {geminiRecommendations.length > 0 ? (
+            geminiRecommendations.map((suggestion, idx) => (
+              <li key={idx} className="recommendation-item">{suggestion}</li>
+            ))
+          ) : (
+            <li className="recommendation-item">No additional suggestions.</li>
+          )}
+        </ul>
       </div>
 
       {/* Download Section */}

@@ -183,6 +183,26 @@ function analyzeEmotions(emotionData) {
   }
 }
 
+app.post('/api/gemini', async (req, res)=>{
+    try{
+        const {transcript} = req.body;
+
+        // Simple example checks
+        let suggestions = [];
+        if(!transcript.toLowerCase().includes('project')){
+            suggestions.push('Please mention your projects or relevant experiences.');
+        }
+        if(!transcript.toLowerCase().includes('goal')){
+            suggestions.push('Consider stating your career goals or aspirations.');
+        }
+
+        return res.json({ suggestions });
+        } catch (error) {
+            console.error('Gemini suggestions error:', error);
+            return res.status(500).json({ message: 'Internal server error'});
+        }
+})
+
 // Main upload and analysis endpoint
 app.post('/api/upload', (req, res) => {
   console.log('Upload request received');
