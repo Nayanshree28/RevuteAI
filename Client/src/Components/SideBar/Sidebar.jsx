@@ -9,9 +9,15 @@ import { useNavigate } from 'react-router-dom';
 
 const Sidebar = ({ setSection }) => {
   const navigate = useNavigate();
+  const userId = localStorage.getItem('userId');
+
   const handleIntro_navigation = () =>{
     setSection('task1')
     navigate('/task1')
+  }
+  const handleReportList = () =>{
+    setSection('reportList')
+    navigate(`/reportList/${userId}`)
   }
   
   return (
@@ -22,7 +28,7 @@ const Sidebar = ({ setSection }) => {
         <li onClick={handleIntro_navigation}> <MdOutlineTaskAlt size={20}/> Self intro pitch</li>
         <li onClick={() => setSection('task2')}> <MdOutlineTaskAlt size={20}/> Bot_ mock pitch</li>
         
-        <li onClick={() => setSection('reportlist')}>
+        <li onClick={handleReportList}>
           <TbReportSearch size={20} /> Report
         </li>
       </ul>
