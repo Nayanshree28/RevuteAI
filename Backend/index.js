@@ -292,7 +292,7 @@ app.use((err, req, res, next) => {
 
 // Connect to MongoDB
 mongoose
-  .connect('mongodb://127.0.0.1:27017/RevuteAI')
+  .connect(MONGODB_URI)
   .then(() => {
     console.log("MongoDB connected successfully!");
     // Start the server only after successful DB connection

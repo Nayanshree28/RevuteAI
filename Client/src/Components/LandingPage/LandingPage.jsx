@@ -34,7 +34,6 @@ const LandingPage = () => {
   return (
     <div className="layout-container">
       <Navbar />
-
       <div className="main-body">
         <Sidebar setSection={setSection} />
         <div className="center-content">{renderSection()}</div>

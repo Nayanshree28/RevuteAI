@@ -7,6 +7,7 @@ import ReportPage from "./Components/ReportPage/ReportPage";
 import HomePage from "./Components/HomePage/HomePage";
 import Task1 from "./Components/Task1/Task1";
 import ListedReport from "./Components/ListedReports/ListedReport";
+import ProfilePage from "./Components/ProfilePage/ProfilePage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/report" element={<ReportPage/>} />
           <Route path="/task1" element={<Task1/>} />
           <Route path="/reportlist/:userId" element={<ListedReport/>} />
+          <Route path= "/profile" element={<ProfilePage/>} />
         </Routes>
       </BrowserRouter>
     </>

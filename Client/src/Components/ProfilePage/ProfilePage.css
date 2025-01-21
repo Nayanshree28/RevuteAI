@@ -1,0 +1,50 @@
+.profile-page {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .profile-page h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .profile-page-form-group {
+    margin-bottom: 15px;
+  }
+  
+  .profile-page-form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .profile-page-form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .profile-page-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #004aad;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .profile-page-button:hover {
+    background-color: #003387;
+  }
+  
+  .profile-page-message {
+    margin-top: 15px;
+    text-align: center;
+    color: red;
+  }
+  

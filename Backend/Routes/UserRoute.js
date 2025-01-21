@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../Model/UserSchema');
+const authMiddleware = require('../Middleware/authmiddleware')
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -76,6 +77,34 @@ router.post('/login', async (req, res) => {
     username: user.username,
     role: user.role,
   });
+});
+
+// routes for updating password
+router.post('/update-password', authMiddleware, async (req, res) => {
+  const { oldPassword, newPassword } = req.body;
+
+  try {
+    const user = await User.findById(req.user.id); // Assuming `req.user.id` contains authenticated user's ID
+
+    // Check if old password matches
+    const isMatch = await bcrypt.compare(oldPassword, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ success: false, message: 'Old password is incorrect.' });
+    }
+
+    // Hash the new password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+    // Update the password in the database
+    user.password = hashedPassword;
+    await user.save();
+
+    res.json({ success: true, message: 'Password updated successfully!' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Server error.' });
+  }
 });
 
 module.exports = router;

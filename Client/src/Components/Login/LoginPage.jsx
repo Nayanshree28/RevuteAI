@@ -3,7 +3,7 @@ import "./LoginPage.css";
 import { FaBrain } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../Services/apiConnection";
-import companylogo from '../../../Images/company_logo.jpeg'
+import companylogo from '../../images/company_logo.jpeg'
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -52,6 +52,7 @@ const LoginPage = () => {
       } else {
         console.log("Login response:", data);
         localStorage.setItem("token", data.token);
+        localStorage.setItem("userId", data.userId); 
         localStorage.setItem("username", data.username);
         navigate("/landingpage");
       }

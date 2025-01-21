@@ -75,6 +75,7 @@ const ReportPage = () => {
         body: JSON.stringify({
           userId: localStorage.getItem('userId'), // Replace with actual user ID
           reportData: localStorage.getItem('reportData'),
+          transcript: transcript,
         }),
       });
   

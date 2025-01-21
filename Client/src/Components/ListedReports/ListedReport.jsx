@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const ListedReport = () => {
+  const navigate = useNavigate()
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -38,6 +40,10 @@ const ListedReport = () => {
     fetchReports();
   }, []);
 
+  const handleReportClick = () =>{
+    navigate('/report')
+  }
+
   return (
     <div className="report-list">
       <h1>Report List</h1>
@@ -50,41 +56,7 @@ const ListedReport = () => {
 
           return (
             <div className="report-card" key={report._id || index}>
-              <h3>Report {index + 1}</h3>
-              <p>Generated on: {new Date(report.createdAt).toLocaleString()}</p>
-              <h4>Summary:</h4>
-              <p>Total Duration: {summary?.totalDuration || 'N/A'}</p>
-              <p>Words Per Minute: {summary?.wordsPerMinute || 'N/A'}</p>
-              <p>Total Words: {summary?.totalWords || 'N/A'}</p>
-              <h4>Grammar Analysis:</h4>
-              <p>Score: {grammarAnalysis?.score || 'N/A'}</p>
-              <p>Feedback: {grammarAnalysis?.feedback || 'N/A'}</p>
-              <h4>Sentiment Analysis:</h4>
-              <p>Confidence Score: {sentimentAnalysis?.confidenceScore || 'N/A'}</p>
-              <p>Clarity Score: {sentimentAnalysis?.clarityScore || 'N/A'}</p>
-              <p>Overall Impression: {sentimentAnalysis?.overallImpression || 'N/A'}</p>
-              <p>Sentiment: {sentimentAnalysis?.sentiment || 'N/A'}</p>
-              <h4>Professional Analysis:</h4>
-              <p>Communication Score: {professionalAnalysis?.communicationScore || 'N/A'}</p>
-              <p>Organization Score: {professionalAnalysis?.organizationScore || 'N/A'}</p>
-              <p>Recommendations:</p>
-              <ul>
-                {professionalAnalysis?.recommendations?.map((recommendation, i) => (
-                  <li key={i}>{recommendation}</li>
-                )) || <li>N/A</li>}
-              </ul>
-              <h4>Emotion Analysis:</h4>
-              {emotionAnalysis ? (
-                <ul>
-                  {Object.entries(emotionAnalysis).map(([emotion, value]) => (
-                    <li key={emotion}>
-                      {emotion}: {value}%
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p>N/A</p>
-              )}
+              <button onClick={handleReportClick}>button: {index + 1}</button>
             </div>
           );
         })
