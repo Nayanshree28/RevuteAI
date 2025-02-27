@@ -1,0 +1,38 @@
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-body {
+  display: flex;
+  flex: 1;
+  margin-top: 60px; 
+}
+
+
+.center-content {
+  flex: 1;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+@media (max-width: 992px) {
+  .main-body {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 992px) {
+  .announcement-sidebar {
+    display: none;
+  }
+
+  .center-content {
+    display: none;
+  }
+}
+
+
+
+

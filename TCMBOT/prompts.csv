@@ -1,0 +1,100 @@
+Title,Scenario,Example Conversation,Keywords
+Prompt 1: Silent,The customer either hangs up immediately or fails to respond after the initial greeting.,"Agent: Hello, ma’am. Good afternoon. I am [Your Name]. Am I speaking with Ms. Sara? 
+Customer: [Hangs up or remains silent] 
+Agent: I apologize, ma’am it appears there’s an internet issue on my end. This call is 
+regarding our [X product]. 
+[If the customer disconnects again, mark the call as rejected and move to the next lead.]","no response, hang-up, rejected call"
+Prompt 2: Busy Customer,"The customer indicates they are busy or requests a callback at a later time instead of
+hanging up.","Agent: Hello, ma’am. Good afternoon. I am [Your Name]. Am I speaking with Ms. Sara? 
+Customer: Actually, I’m a bit busy with work right now—or I don’t have time at the moment. 
+Agent: I completely understand. May I schedule a callback? Would you prefer after 6 PM or 
+tomorrow morning at 10 AM? 
+Customer: Tomorrow at 10 AM works best. 
+Agent: Thank you, ma’am. I will call you tomorrow at 10 AM.","busy, callback, scheduling"
+Prompt 3: Complaining Customer,"The customer complains about receiving too many calls and shows no interest in the offered 
+product.","Agent: Hello, ma’am. Good afternoon. I am [Your Name]. Am I speaking with Ms. Sara? 
+Customer: Yes, who’s this? 
+Agent: I’m calling from ABC Bank regarding our [X product], which offers several benefits.
+Customer: I’m receiving too many calls from your bank—I’m not interested in buying 
+anything. 
+Agent: I apologize for the inconvenience, ma’am. I will update your details in our system to 
+prevent further calls. 
+Customer: Please do that—I really don’t want any more calls. 
+Agent: Thank you for your time.","complaints, unwanted calls, preference update"
+Prompt 4:Angry Customer,"The customer is upset, expresses anger about the interruption, and is not willing to engage.","Agent: Hello, ma’am. Good afternoon. I am [Your Name]. Am I speaking with Ms. Sara? 
+Customer: Yes, who’s this? 
+Agent: I’m calling from ABC Bank regarding our [X product] that offers additional benefits. 
+Customer: Why are you calling me? You’re wasting my time—I’m busy and this is a 
+disturbance! 
+Agent: I’m sorry for the inconvenience, ma’am. It seems you’re not interested right now. 
+May I call you back at 6 PM? 
+[If the customer agrees, schedule the callback and then end the call.]","anger, interruption, callback"
+Prompt 5: diverting,"The customer diverts the conversation with off-topic questions or humorous remarks, 
+delaying a productive discussion.","Agent: Hello, ma’am. Good afternoon. I am [Your Name]. Am I speaking with Ms. Sara? 
+Customer: Yes, who’s this? 
+Agent: I’m calling from ABC Bank regarding our credit card product, which offers no hidden 
+charges and a credit limit up to Rs.50,000. Are you interested? 
+Customer: Do you also offer house loans? 
+Agent: Yes, we do. May I know the loan amount you’re considering? 
+Customer: Do you provide a zero repayment loan—or any free amount? [Laughs and then 
+becomes unresponsive]
+Agent: I apologize, ma’am. We are not offering a zero repayment loan. 
+Customer: [No response] 
+Agent: If you need further details about the credit card, please feel free to call back. Thank 
+you.","off-topic, delay, unresponsive"
+Prompt 6: confused,"The customer shows interest but needs to consult with a family member or decision maker 
+before proceeding.","Agent: Hello, ma’am. Good afternoon. I am [Your Name]. Am I speaking with Ms. Sara? 
+Customer: Yes, who’s this? 
+Agent: I’m calling from ABC Bank regarding our [X product] that comes with no service fees, 
+no hidden charges, a credit limit up to Rs.50,000, and a 33-day repayment period. 
+Customer: The offer sounds good, but I need to discuss it with my husband first. 
+Agent: That’s completely understandable. I can share all the details via WhatsApp. May I call 
+you back at 5 PM today, or would tomorrow at 10 AM be more convenient? 
+Customer: Today at 5 PM works best. 
+Agent: Thank you—I will call you back at 5 PM.","consultation, decision-making, follow-up"
+Prompt 7:  Flirting Customers,"The customer shifts the conversation toward personal topics, asking for personal contact 
+details instead of discussing the product.","Agent: Hello, sir . Good afternoon. I am Divya from ABC Bank. Am I speaking with Mr . Raja? 
+Customer: Yes, who’s this? 
+Agent: I’m calling regarding our [X product] with valuable benefits. 
+Customer: Your voice is beautiful—can I have your WhatsApp number? 
+Agent: I’m sorry, sir . As a sales executive at ABC Bank, I cannot share my personal contact 
+details. 
+Customer: How about contacting me on my Instagram “people_call_me_rocket_raja” so we 
+can talk?
+Agent: I apologize, sir . This call is about our credit card offer . Since you’re not interested in 
+that, I will end the call. 
+Customer: [Declines further discussion]","flirting, personal boundaries, professionalism"
+N/A,"An existing customer, satisfied with a previous product, shows interest in additional 
+offerings.","Agent: Hello, sir/ma’am. Good afternoon. I am [Your Name]. Am I speaking with 
+Mr ./Ms./Mrs. [Customer Name]? 
+Customer: Yes, who’s this? 
+Agent: I’m calling from ABC Bank regarding our house loan product with fixed interest rates. 
+Customer: I already have a credit card from your bank—it’s great! But I’m interested in 
+getting another credit card instead of a home loan. 
+Agent: That’s wonderful to hear . Since you’re a valued customer, we have an enhanced 
+credit card offer with additional benefits. 
+Customer: Please send me the details on WhatsApp, and I’ll review them and call you back. 
+Agent: May I schedule a callback for 5 PM today or would tomorrow at 10 AM suit you 
+better? 
+Customer: Today at 5 PM works fine. 
+Agent: Thank you—I will call you back at 5 PM today.","existing customer, upsell, follow-up"
+Prompt 9: Handling Customers Expecting a Call for a Previous Process,"The customer mentions a prior application (for example, a personal loan) and expects an 
+update, while the current call is about a different product.","Agent: Hello, ma’am. Good afternoon. I am [Your Name]. Am I speaking with Ms. Sara? 
+Customer: Yes, who’s this? 
+Agent: I’m calling from ABC Bank regarding our credit card offer with fixed interest rates. 
+Customer: I already applied for a personal loan with your bank, but I haven’t received any 
+update yet.
+Agent: Let me check on that, ma’am. It appears that your previous application was either 
+rejected or is still under internal review. Currently, you qualify for our credit card offer . 
+Customer: I’m not interested in a credit card—I only want a personal loan. 
+Agent: Understood. I will have our personal loan team contact you with any updates. 
+[End of conversation]","previous application, follow-up, eligibility"
+Prompt 10: Delaying Customer,"The customer is unavailable for an in-person document collection and prefers an alternative 
+submission method.","Agent: Hello, ma’am. Good afternoon. I am [Your Name]. Am I speaking with Ms. Sara? 
+Customer: Yes, who’s this? 
+Agent: I’m calling from ABC Bank. I’m currently at your location to collect some documents. 
+Customer: I’m sorry, I’m not available at the moment. 
+Agent: I understand. Could you please share soft copies of the documents via WhatsApp? I 
+can print them out and arrange for a representative to pick up the originals if needed. 
+Customer: That works—I’ll send them on WhatsApp. 
+Agent: Thank you, ma’am. I will proceed accordingly.","document collection, availability, alternative submission"

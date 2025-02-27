@@ -1,0 +1,199 @@
+/* ProfilePage.css */
+.profile-page-container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 2rem;
+  background-color: #f8f9fa;
+}
+
+.profile-Info-title {
+  font-size: 2.5rem;
+  color: #2d3436;
+  text-align: center;
+  padding: 2rem 0;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.profile-image-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 3rem;
+  background: linear-gradient(
+    135deg,
+    #344CB7 0%,
+    #4A6DE5 50%,
+    #6B46C1 100%
+  );
+  box-shadow: 0 4px 15px rgba(52, 76, 183, 0.3);
+  padding-top: 30px;
+}
+
+.profile-upload-section {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.profile-image-wrapper {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.upload-icon {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: white;
+  padding: 8px;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  cursor: pointer;
+  z-index: 2;
+}
+
+.UserName-section {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #2d3436;
+  margin-top: 1.5rem;
+}
+
+.profile-elements {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.profile-userInput, .profile-userBio {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.profile-field {
+  margin-bottom: 1.5rem;
+}
+
+.profile-label {
+  display: block;
+  font-size: 0.9rem;
+  color: #636e72;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.profile-input.view-mode, .profile-textarea.view-mode {
+  border: none;
+  background: transparent;
+  padding: 0;
+  font-size: 1rem;
+  color: #2d3436;
+  cursor: default;
+}
+
+.profile-input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.profile-input:focus {
+  border-color: #74b9ff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(116,185,255,0.1);
+}
+
+.profile-textarea {
+  width: 100%;
+  height: 150px;
+  padding: 0.8rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  resize: vertical;
+}
+
+.EditProfileInfo {
+  background: #74b9ff;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.EditProfileInfo:hover {
+  background: #3498db;
+}
+
+.ChanepasswordContainer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.password-title {
+  font-size: 1.8rem;
+  color: #2d3436;
+  margin-bottom: 1.5rem;
+}
+
+.password-fields {
+  display: grid;
+  gap: 1rem;
+}
+
+.profile-button {
+  background: #00b894;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1.5rem;
+}
+
+.profile-button:hover {
+  background: #00a383;
+}
+
+@media (max-width: 768px) {
+  .profile-elements {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+  
+  .profile-Info-title {
+    font-size: 2rem;
+    padding: 1rem 0;
+  }
+  
+  .UserName-section {
+    font-size: 1.5rem;
+  }
+}

@@ -1,0 +1,538 @@
+/* Base Container & Typography */
+.ModulePage-MainContainer {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.ModulePage-elements {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar */
+.ModulePage-Navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  height: 60px;
+  padding: 0 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.CompanyLogo-Container img {
+  height: 40px;
+  cursor: pointer;
+}
+
+.Navbar-rightSection {
+  display: flex;
+  align-items: center;
+}
+
+.Logout-btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 10px;
+}
+
+.Logout-btn:hover {
+  background-color: #6a4b95;
+}
+
+.UserAvatar {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(226, 225, 225);
+  cursor: pointer;
+}
+
+/* Layout: Sidebar & Content */
+.ModulePage-middleSection {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.Modulepage-sidebar {
+  width: 280px;
+  background-color: #fff;
+  border-right: 1px solid #e0e0e0;
+  padding: 15px;
+  overflow-y: auto;
+}
+
+.ModulesSection {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.BackToDashboard {
+  color: #555;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 8px;
+  transition: color 0.3s;
+}
+
+.BackToDashboard:hover {
+  color: #7b5fa6;
+}
+
+.Course-title {
+  color: #333;
+  font-weight: 500;
+  margin: 8px 0;
+  font-size: 1rem;
+}
+
+.ProgressBar {
+  width: 100%;
+  height: 10px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  margin: 10px 0 5px;
+  overflow: hidden;
+}
+
+.ProgressCompleted {
+  height: 100%;
+  background-color: #007bff;
+  width: 0%;
+  transition: width 0.5s ease;
+}
+
+.ProgressText {
+  color: #333;
+  font-weight: 500;
+  margin-top: 5px;
+  font-size: 0.9rem;
+}
+
+/* Sidebar List */
+.SidebarList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.SidebarList li {
+  margin-bottom: 8px;
+}
+
+.ModuleItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.ModuleItem:hover {
+  background-color: #f2f2f2;
+}
+
+.ModuleItem.selected {
+  background-color: #e9ecef;
+}
+
+.ModuleTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.ModuleScore {
+  font-size: 0.9rem;
+  color: #333;
+  font-weight: 300;
+  margin: 0;
+}
+
+.ModuleCompletionIndicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ccc;
+}
+
+.ModuleCompletionIndicator.completed {
+  background-color: green;
+}
+
+.ModuleSubItems {
+  list-style: none;
+  padding: 0;
+  margin: 5px 0 5px 15px;
+  border-left: 2px solid #e0e0e0;
+}
+
+.ModuleSubItems li {
+  padding: 5px 0;
+  color: #555;
+  cursor: pointer;
+}
+
+.selectedSubItem {
+  font-weight: 600;
+  color: #7b5fa6;
+}
+
+.ModuleTopics {
+  margin-left: 15px;
+  margin-top: 5px;
+  list-style: none;
+  padding: 0;
+}
+
+.selectedTopic {
+  font-weight: 600;
+  color: #7b5fa6;
+}
+
+.TopicDoneIndicator {
+  margin-left: 6px;
+  color: #7b5fa6;
+}
+
+.MarkCompletedBtn {
+  margin-left: 6px;
+  background-color: #7b5fa6;
+  color: #fff;
+  border: none;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 12px;
+  transition: background-color 0.3s ease;
+}
+
+.MarkCompletedBtn:hover {
+  background-color: #6a4b95;
+}
+
+/* Main Content Area */
+.ModulePage-contentArea {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.Breadcrumb {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.ContentCard {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.ContentCard h2 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.ContentText {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+/* Quiz Section */
+.QuizSection {
+  margin-top: 15px;
+}
+
+.QuizItem {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 10px;
+}
+
+.QuizItem p {
+  margin: 0 0 8px;
+  font-weight: 500;
+}
+
+.QuizItem ul {
+  list-style: none;
+  padding: 0;
+}
+
+.QuizItem li {
+  margin-bottom: 5px;
+}
+
+.SubmitQuizBtn {
+  background-color: #7b5fa6;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.SubmitQuizBtn:hover {
+  background-color: #6a4b95;
+}
+
+.ScoreSection {
+  margin-top: 10px;
+  font-weight: 600;
+  color: #7b5fa6;
+}
+
+/* Next Step */
+.NextStep {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #7b5fa6;
+  border-radius: 10px;
+  background-color: #f3e8fb;
+  text-align: center;
+}
+
+.NextStep h2 {
+  margin-bottom: 10px;
+  color: #7b5fa6;
+}
+
+.NextStepBtn {
+  background-color: #7b5fa6;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.NextStepBtn:hover {
+  background-color: #6a4b95;
+}
+
+/* Chatbot Styles */
+.ChatbotToggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  background-color: #007bff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.ChatbotContainer {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 380px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 1001;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.ChatbotMessages {
+  height: 280px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  padding-right: 6px;
+}
+
+.ChatbotMessage {
+  margin-bottom: 8px;
+}
+
+.ChatbotUserMessage {
+  text-align: right;
+}
+
+.ChatbotBotMessage {
+  text-align: left;
+}
+
+.ChatbotMessageText {
+  display: inline-block;
+  padding: 8px;
+  border-radius: 5px;
+  max-width: 70%;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.ChatbotUserMessage .ChatbotMessageText {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.ChatbotBotMessage .ChatbotMessageText {
+  background-color: #eee;
+  color: #000;
+}
+
+.ChatbotInputArea {
+  display: flex;
+  align-items: center;
+}
+
+.ChatbotInput {
+  width: 85%;
+  padding: 8px;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.ChatbotSendBtn {
+  padding: 8px;
+  margin-left: 6px;
+  font-size: 0.9rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.ChatbotSendBtn:hover {
+  background-color: #205791;
+}
+
+/* Rotate Animation for Icons */
+.rotate-icon {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .ModulePage-middleSection {
+    flex-direction: column;
+  }
+
+  .Modulepage-sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 10px;
+  }
+
+  .ModulePage-contentArea {
+    padding: 15px;
+  }
+
+  .ChatbotContainer {
+    width: 90%;
+    bottom: 80px;
+    right: 5%;
+  }
+
+  .ChatbotMessages {
+    height: 220px;
+  }
+}
+
+
+/* Add these styles to your Module.css */
+.PlayButton {
+  margin-left: 10px;
+  padding: 2px 8px;
+  background: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.RecordButton {
+  margin: 10px 0;
+  padding: 8px 16px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.RecordButton.recording {
+  background-color: #28a745;
+}
+
+.SpeechSection {
+  position: relative;
+  width: 100%;
+}
+
+.AnswerTextarea {
+  width: 100%;
+  height: 70px;
+  padding: 10px;
+  margin-top: 8px;
+  border: 2px solid #007bff;
+  border-radius: 4px;
+}
+
+.BrowserWarning {
+  color: #dc3545;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+.AnswerInput {
+  width: 100%;
+  padding: 8px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.TranscriptDisplay {
+  margin-top: 5px;
+  font-style: italic;
+  color: #555;
+}

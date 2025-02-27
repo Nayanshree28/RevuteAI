@@ -1,0 +1,874 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.TrainingPage-mainContainer {
+  width: 100vw;
+  height: 100vh;
+  background-color: #f0f2f5;
+}
+
+.selectionAreaof-TrainingPage {
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.telecommunication-module {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #fafafa;
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.telecommunication-module__back {
+  width: 100px;
+  height: 35px;
+  border-radius: 96px;
+  border: none;
+  background: #3f37c9;
+  color: #fafafa;
+}
+
+.telecommunication-module__title {
+  font-weight: 700;
+  font-size: 50px;
+  color: #1E2330;
+  margin: 20px 0;
+}
+
+.telecommunication-module__description {
+  margin-bottom: 15px;
+  max-width: 500px;
+}
+
+.telecommunication-module__description-text {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  color: #1E2330;
+}
+
+.telecommunication-module__content {
+  display: flex;
+  justify-content: space-between;
+  padding: 50px 0;
+}
+
+.telecommunication-module__left {
+  flex: 1;
+}
+
+.telecommunication-module__acknowledgements {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.telecommunication-module__acknowledgements label {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.telecommunication-module__guidelines ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+#start-practice,
+#start-practice-product {
+  background-color: rgb(25, 167, 214);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+#start-practice:hover,
+#start-practice-product:hover {
+  background-color: #004494;
+}
+
+#start-practice:disabled,
+#start-practice-product:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.telecommunication-module__product-list {
+  margin: 20px 0;
+}
+
+.telecommunication-module__products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.telecommunication-module__product {
+  background-color: #e0e7ff;
+  color: #333;
+  border: 1px solid #cbd5e1;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.telecommunication-module__product:hover,
+.telecommunication-module__product.active {
+  background-color: #c7d2fe;
+}
+
+.telecommunication-module__scenario select {
+  padding: 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.call-view {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #fefefe;
+}
+
+.call-view__header {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.call-view__back-button {
+  cursor: pointer;
+  color: #333;
+}
+
+.call-view__main {
+  margin-top: 60px;
+  display: flex;
+  width: 100%;
+  height: calc(100% - 60px);
+}
+
+.call-view__left-section {
+  width: 35%;
+  max-width: 400px;
+  background-color: #fff;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.call-view__avatar-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.call-view__avatar {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.call-view__extra-controls {
+  margin-top: auto;
+}
+
+.call-view__call-button {
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.call-view__right-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.call-view__chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.call-view__transcript {
+  flex: 1;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  overflow-y: auto;
+}
+
+.call-view__user-message,
+.call-view__bot-message {
+  display: inline-block;
+  padding: 10px 15px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  max-width: 70%;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.call-view__user-message {
+  align-self: flex-end;
+  background-color: #daf5d5;
+  color: #2f5132;
+}
+
+.call-view__bot-message {
+  align-self: flex-start;
+  background-color: #ebecf0;
+  color: #23272b;
+}
+
+.call-view__input-bar {
+  display: flex;
+  align-items: center;
+}
+
+.call-view__text-input {
+  flex: 1;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  padding: 10px 15px;
+  font-size: 14px;
+  outline: none;
+  margin-right: 10px;
+}
+
+.call-view__mic-button {
+  position: relative;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  background-color: #dc3545;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.call-view__mic-animation {
+  position: absolute;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  background-color: rgba(255,255,255,0.3);
+  opacity: 0;
+  animation: mic-wave 1.5s infinite ease-out;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+}
+
+.call-view__mic-button.is-listening .call-view__mic-animation {
+  opacity: 1;
+}
+
+@keyframes mic-wave {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  70% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.trainingPageinfo-container {
+  background-color: #fafafa;
+}
+
+.TrainingPage-mainContainer-Introsection {
+  background-color: #fafafa;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 8rem;
+  margin-bottom: 80px;
+}
+
+.TrainingPage-mainContainer-IntroSection-CenterDiv {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.intro-title {
+  font-size: 3rem;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  color: #1B1B1B;
+}
+
+.intro-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #333;
+  line-height: 1.5;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+}
+
+.intro-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.btn-general-telecalling {
+  background-color: #e05b22;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 96px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.btn-general-telecalling:hover {
+  background-color: #c84f1e;
+}
+
+.btn-product-telecalling {
+  background-color: #fff;
+  color: #e05b22;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #e05b22;
+  border-radius: 96px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-product-telecalling:hover {
+  background-color: #e05b22;
+  color: #fff;
+}
+
+.TrainingPage-containerFor-Features {
+  width: 100vw;
+  height: 100vh;
+  padding: 2rem 1rem;
+  overflow: auto;
+  background-color: #fcfcf9;
+}
+
+.TrainingPage-FeaturesSection {
+  display: flex;
+  max-width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.TrainingPage-leftFeatureSection {
+  flex: 1;
+  min-width: 300px;
+  overflow: auto;
+  position: relative;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.TrainingPage-leftFeatureSection::-webkit-scrollbar {
+  display: none;
+}
+
+.TrainingPage-featuredCard {
+  background-color: #fff;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: stackAnimation 0.5s ease forwards;
+}
+
+.TrainingPage-leftFeatureSection .TrainingPage-featuredCard:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.TrainingPage-leftFeatureSection .TrainingPage-featuredCard:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.TrainingPage-leftFeatureSection .TrainingPage-featuredCard:nth-child(3) {
+  animation-delay: 0.6s;
+}
+.TrainingPage-leftFeatureSection .TrainingPage-featuredCard:nth-child(4) {
+  animation-delay: 0.8s;
+}
+.TrainingPage-leftFeatureSection .TrainingPage-featuredCard:nth-child(5) {
+  animation-delay: 1s;
+}
+.TrainingPage-leftFeatureSection .TrainingPage-featuredCard:nth-child(6) {
+  animation-delay: 1.2s;
+}
+.TrainingPage-leftFeatureSection .TrainingPage-featuredCard:nth-child(7) {
+  animation-delay: 1.4s;
+}
+
+@keyframes stackAnimation {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.TrainingPage-leftFeatureSection h2 {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 2rem 0 0.5rem;
+  color: #1b1b1b;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.TrainingPage-leftFeatureSection h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background-color: #000;
+}
+
+.TrainingPage-leftFeatureSection p {
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  max-width: 600px;
+}
+
+.TrainingPage-rightFeatureImageSection {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  position: relative;
+}
+
+.TrainingPage-rightFeatureImageSection img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.Encourage-wrapper {
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Encourage-tiltLayer {
+  width: 80%;
+  height: 35%;
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: #FBA518;
+}
+
+.Encourage-contentContainer {
+  width: 98%;
+  height: 100%;
+  background: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  justify-content: space-between;
+  transform: rotate(-2deg);
+}
+
+.Encourage-topRow h2 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #2f2f2f;
+}
+
+.Encourage-contentContainer p {
+  margin-top: 1rem;
+  color: #2f2f2f;
+  line-height: 1.5;
+}
+
+.Encourage-contentContainer button {
+  background-color: #cc5e1f;
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.Encourage-contentContainer button:hover {
+  background-color: #b3531b;
+}
+
+.container-telecalling {
+  display: flex;
+  align-items: center;
+  padding: 28px;
+  background-color: #f8f9fa;
+  height: 100vh;
+  width: 100%;
+  /* background-color: yellow; */
+}
+
+.leftPanel-telecalling {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+  height: 90vh;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+}
+
+.userImage {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ddd;
+}
+
+.customerType {
+  margin-top: 15px;
+  padding: 15px;
+  background-color: #e9ecef;
+  border-radius: 8px;
+  text-align: center;
+  width: 50%;
+  font-size: 16px;
+}
+
+.polite {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.rude {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.micButton {
+  padding: 10px 15px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.micOn {
+  background-color: #28a745;
+  color: white;
+}
+
+.micOff {
+  background-color: #6c757d;
+  color: white;
+}
+
+.conversation {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 90vh;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.conversationTitle {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.chatScreen {
+  height: 100vh;
+  padding: 10px;
+  border-radius: 5px;
+  background: #f1f1f1;
+}
+
+.chatMessage {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.chatControls {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.chatInput {
+  flex: 1;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  color: black;
+}
+
+.sendButton {
+  padding: 8px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.endCall {
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 14px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  cursor: pointer;
+}
+
+/* Additional CSS for telecalling view */
+.telecalling-view__not-in-call {
+  /* padding: 20px; */
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; */
+  min-height: 100vh;
+  width: 100%;
+  background-color: #fafafa;
+  padding: 20px;
+  /* background-color: red; */
+}
+.telecalling-view__not-in-call-box {
+  background-color: #fafafa;
+  padding: 30px;
+  /* border-radius: 10px; */
+  /* box-shadow: 0 2px 8px rgba(0,0,0,0.1); */
+  /* text-align: center; */
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 18px;
+  height: 100%;
+  width: 100%;
+  /* background-color: red; */
+}
+.telecalling-view__not-in-call-title {
+  font-size: 3.1rem;
+  font-weight: 700;
+  font-family: Poppins;
+font-weight: 700;
+/* font-size: 56px; */
+line-height: 70px;
+letter-spacing: 0px;
+color: #1E2330;
+
+
+  margin-bottom: 15px;
+
+  /* color: #333; */
+}
+
+.telecalling-reset_call_btn{
+  /* background-color: yellow; */
+  width: 100vw;
+  height: 80vh;
+  display: flex;
+  gap: 30px;
+  padding: 50px;
+
+}
+
+.telecalling-view__welcome-text{
+  font-family: Poppins;
+font-weight: 500;
+font-size: 20px;
+line-height: 30px;
+letter-spacing: 0px;
+color: #1E2330;
+
+}
+
+.telecalling-view__call-info {
+  width: 610px;
+  height: 260px;
+  border-radius: 23.06px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 32.35px 0px #00000040;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 5px;
+  
+}
+
+.telecalling-view__call-info-title {
+  font-family: Poppins;
+  /* font-weight: 600; */
+  font-size: 20px;
+  /* line-height: 20.18px; */
+  /* letter-spacing: 0%; */
+  color: #000000;
+  /* margin-bottom: 5px; */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  
+}
+.telecalling-view__call-count {
+  font-size: 24px;
+  font-weight: bold;
+}
+.telecalling-view__next-type {
+  font-size: 14px;
+  color: #666;
+  margin-top: 10px;
+}
+.telecalling-view__make-call-button {
+  width: 150px;
+  height: 55px;
+  border-radius: 90px;
+  /* padding-top: 18px;
+  padding-right: 34.06px;
+  padding-bottom: 20px;
+  padding-left: 26px; */
+  border: none;
+  background: #28A263;
+  font-family: Poppins;
+font-weight: 400;
+font-size: 14px;
+line-height: 24px;
+letter-spacing: 0px;
+color: #FFFFFF;
+
+  
+}
+.telecalling-view__make-call-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+.telecalling-view__reset-button {
+  margin: 20px;
+  padding: 12px 16px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.telecalling-view__behavior-text {
+  margin-top: 5px;
+  font-weight: bold;
+}
+.telecalling-view__instruction-text {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #666;
+}
+.telecalling-view__chat-message {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+.telecalling-view__chat-controls {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.telecalling-view__chat-input {
+  flex: 1;
+  padding: 8px;
+  font-size: 14px;
+  outline: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+.telecalling-afterCallView{
+  background-color: yellow;
+  width: 100vw;
+  height: 100vh;
+}
