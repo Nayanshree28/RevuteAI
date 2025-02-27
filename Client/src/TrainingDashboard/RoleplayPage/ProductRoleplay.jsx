@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { IoReturnUpBackOutline } from "react-icons/io5";
 import "./ProductRolePlay.css"; // We'll create this CSS file
+import ProfileImage from "../../images/product1_avatar.svg"
 
 const ProductRolePlay = ({ onBack }) => {
   const [inCall, setInCall] = useState(false);
@@ -386,7 +387,7 @@ const ProductRolePlay = ({ onBack }) => {
       {/* Left Side - Image & Customer Type */}
       <div className="banking-left-panel">
         <img
-          src="/busines-man-img.png"
+          src={ProfileImage}
           alt="Customer"
           className="banking-user-image"
         />
